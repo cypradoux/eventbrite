@@ -9,19 +9,14 @@
   <%= link_to "Créer un Event! +", new_event_path, :class=>"btn btn-outline-success my-2 my-sm-0" %>
 </div> 
 <div class="infos"
-    <p> --> Localisation : <p> 
-    <p> <%= @element.location %> </p>
-    <p> --> Titre : <p>
-    <p> <%= @element.title %> </p>
-    <p> --> Description :</p>
-    <p> <%= @element.description %> </p>
-    <p> --> Prix :</p>
-    <p> <%= @element.price %> </p>
-    <p> --> Date :</p>
-    <p> <%= @element.started_date %> </p>
-    <p> --> Durée :</p>
-    <p> <%= @element.duration %> </p>
-
+    <ul class"list-group">
+        <li class="list-group-item"> Localisation : <%= @element.location %> </li> 
+        <li class="list-group-item"> Titre : <%= @element.title %> </li>
+        <li class="list-group-item"> Description : <%= @element.description %></li>
+        <li class="list-group-item"> Prix : <%= @element.price %> €</li>
+        <li class="list-group-item"> Date : <%= @element.started_date %></li>
+        <li class="list-group-item"> Durée : <%= @element.duration %> heures</li>
+    </ul>
     <div class="actions mt-2 mb-2">
         <%= link_to "Revenir à la page d'accueil", event_index_path, class: "btn btn-xl btn-danger btn-block" %>
     </div>

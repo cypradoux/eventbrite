@@ -6,6 +6,7 @@ class EventController < ApplicationController
                           started_date: params[:started_date],
                           price: params[:price],
                           duration: params[:duration])
+
     # @events.user = User.find_by(id: session[:user_id])
 
       if @events.save
