@@ -3,5 +3,11 @@ class Attendance < ApplicationRecord
     belongs_to :event
 
     validates :stripe_customer_id, presence: true
-    after_create :new_guest_send
+
+    after_create :send_email
+
+    def send_email  
+        AttendanceMailer.send_email(self).deliver_now
+
+    end
 end
