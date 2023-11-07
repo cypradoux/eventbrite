@@ -1,29 +1,23 @@
 <ul>
   <% if user_signed_in? %>
-    <li>
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete} %>
-    </li>
+    <div class="actions mt-5">
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: {turbo_method: :delete}, class: "btn btn-lg btn-danger btn-block" %>
+    </div>
+      <p> Voici ton email : <%= current_user.email %> </p>
+    <div class="actions mt-2">
+      <%= link_to "Secret page", static_pages_secret_path, class: "btn btn-xl btn-primary btn-block" %>
+    </div>
+    <div class="actions mt-2">
+        <%= link_to "Edit email / password", edit_user_registration_path, class: "btn btn-xl btn-info btn-block" %>
+    </div>
 
-    <li>
-      Voici ton email : <%= current_user.email %>
-    </li>
-
-    <li>
-      <%= link_to "Secret page", static_pages_secret_path %>
-    </li>
-
-    <li>
-      <%= link_to "Edit email / password", edit_user_registration_path %>
-    </li>
-
-  <% else %>
-    <li>    
-      <%= link_to "Sign in", new_user_session_path %>
-    </li>
-
-    <li>
-      <%= link_to "Sign up", new_user_registration_path %>
-    </li>
+    <% else %>
+    <div class="actions mt-2">   
+      <%= link_to "Sign in", new_user_session_path, class: "btn btn-lg btn-success btn-block" %>
+    </div>
+    <div class="actions mt-2">
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary btn-block" %>
+    </div>
 
   <% end %>
 </ul>

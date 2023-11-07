@@ -3,23 +3,23 @@ class Event < ApplicationRecord
     has_many :users, through: :attendances
 
     validates :started_date, presence: true
-    validates :time, presence: true, numericality: { greater_than: 0 }
-    validates :devisible_by_5, presence: true
+    validates :duration, presence: true, numericality: { greater_than: 0 }
     validates :title, presence: true, length: { minimum: 5, maximum: 140 }
     validates :description, presence: true, length: { minimum: 20, maximum: 1000 }
     validates :price, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
     validates :location, presence: true
-    validates :started_date_cannot_be_in_the_past, presence: true
+    validate :started_date_cannot_be_in_the_past
+    validate :devisible_by_5
 
     def started_date_cannot_be_in_the_past
         if started_date.present? && started_date < Date.today
-            errors.add(:start_date, "cant' be in the past")
+            errors.add(:started_date, "cant' be in the past")
         end
     end
 
     def devisible_by_5
-        if time.present? && time % 5!=0
-            errors.add(:time, "must be a multiple of 5")
+        if duration.present? && duration % 5!=0
+            errors.add(:duration, "must be a multiple of 5")
         end
     end
 end

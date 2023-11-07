@@ -2,6 +2,36 @@
 
 </head>
 
-
+<body>
 <h1>Eventbrite</h1>
 <h2>C'est ici que tu créé un putain d'event</h2>
+<div class="formulaire">
+<%= form_for Event.new, url: event_index_path do %>
+    <%= label_tag :title, 'Titre' %>
+    <%= text_field_tag :title %>
+    <br /> <br />
+
+    <%= label_tag :location, 'Localisation' %>
+    <%= text_field_tag :location %>
+    <br /> <br />
+
+    <%= label_tag :price, 'Prix' %>
+    <%= text_field_tag :price %>
+    <br /> <br />
+
+    <%= label_tag :started_date, 'Date' %>
+    <%= text_field_tag :started_date %>
+    <br /> <br />
+
+    <%= label_tag :duration, 'Durée' %>
+    <%= text_field_tag :duration %>
+    <br /> <br />
+
+    <%= label_tag :description, 'Description' %>
+    <%= text_area_tag :description %>
+    <br /> <br />
+<%= submit_tag "Créer un évènement", :class=>"btn btn-success" %>
+
+<% end %>
+</div>
+</body>
