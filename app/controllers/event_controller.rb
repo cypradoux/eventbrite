@@ -7,7 +7,7 @@ class EventController < ApplicationController
                           price: params[:price],
                           duration: params[:duration])
 
-    # @events.user = User.find_by(id: session[:user_id])
+    @events.user = current_user.id
 
       if @events.save
         flash[:success] = "L'évènement a été créé avec succès"
@@ -25,6 +25,8 @@ class EventController < ApplicationController
     def show
         index = params[:id].to_i
     @element = Event.all[index - 1]
-
+    # @event = Event.find(params[:id])
+    # @user = @event.user # Récupère l'utilisateur qui a créé l'événement
+    # @user_email = @user.email
     end
 end

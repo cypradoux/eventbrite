@@ -4,6 +4,8 @@ ruby "3.2.2"
 
 gem 'faker'
 
+gem 'stripe'
+
 gem 'table_print'
 
 gem 'dotenv-rails'
