@@ -22,13 +22,13 @@
     </ul>
     <% if current_user %>
         <% if current_user.email != @element.user.email %>
-    <div class="button">
-        <%= button_to "S'inscrire à l'évènement", checkout_create_path(total: @element.price), :class=>"btn btn-primary", data: {turbo: false} %>
-    </div>  
+            <div class="button">
+                <%= button_to "S'inscrire à l'évènement", new_attendance_path(total: @element.price), :class=>"btn btn-primary", data: {turbo: false} %>
+            </div>  
     <% else %>
-    <div class="button">
-        <%= link_to "Se connecter", new_user_session_path, :class=>"dropdown-item" %>
-    </div>  
+        <div class="button">
+            <%= link_to "Se connecter", new_user_session_path, :class=>"dropdown-item" %>
+        </div>  
         <% end %>
     <% end %> 
     <div class="actions mt-2 mb-2">
