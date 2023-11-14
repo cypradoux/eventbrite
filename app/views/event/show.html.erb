@@ -1,38 +1,79 @@
 <head>
-
 </head>
-
 <body>
-<h1>Eventbrite</h1>
-<h2>Voici un super event</h2>
-<div class="button">
-  <%= link_to "Créer un Event! +", new_event_path, :class=>"btn btn-outline-success my-2 my-sm-0" %>
-</div> 
-<div class="infos"
-    <ul class"list-group">
-        <li class="list-group-item"> Localisation : <%= @element.location %> </li> 
-        <li class="list-group-item"> Titre : <%= @element.title %> </li>
-        <li class="list-group-item"> Description : <%= @element.description %></li>
-        <li class="list-group-item"> Prix : <%= @element.price %> €</li>
-        <li class="list-group-item"> Date de début : <%= @element.started_date %></li>
-        <li class="list-group-item"> Date de fin : <%= %></li>
-        <li class="list-group-item"> Nombre d'inscrits : <%=  %></li>
-        <li class="list-group-item"> Durée : <%= @element.duration %> heures</li>
-        <li class="list-group-item"> Organisateur : <%= @element.user.email %></li>
-    </ul>
-    <% if current_user %>
-        <% if current_user.email != @element.user.email %>
-            <div class="button">
-                <%= button_to "S'inscrire à l'évènement", new_attendance_path(total: @element.price), :class=>"btn btn-primary", data: {turbo: false} %>
-            </div>  
-    <% else %>
-        <div class="button">
-            <%= link_to "Se connecter", new_user_session_path, :class=>"dropdown-item" %>
-        </div>  
-        <% end %>
-    <% end %> 
-    <div class="actions mt-2 mb-2">
-        <%= link_to "Revenir à la page d'accueil", event_index_path, class: "btn btn-xl btn-danger btn-block" %>
-    </div>
+
+<div class="show-banner">
+  <div class="container hero-text">
+    <h1 class="display-4">Eventbrite</h1>
+    <h2 class="lead">Voici un super event, réserve ta place dès maintenant !</h2>
+  </div>
 </div>
+<div class="container">
+  <div class="row">
+    <!-- Molécule d'image (8 colonnes) -->
+    <div class="col-md-8">
+      <div class="image-molecule">
+        <% if @event.image.attached? %>
+          <%= image_tag @event.image, alt: 'image' %>
+        <% else %>
+          <p>=== Il n'y a pas encore d'image liée à cet évènement ===</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4 info-section">
+      <ul class="list-group">
+        <li class="list-group-item">Localisation : <%= @element.location %></li>
+        <li class="list-group-item">Titre : <%= @element.title %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>A propos de cet évènement : </h3>
+      <p><%= @element.description %></p>
+    </div>
+    <div class="col-md-4">
+      <li class="list-group-item"> Prix : <%= @element.price %> €</li>
+      <li class="list-group-item"> Date de début : <%= @element.started_date %></li>
+      <li class="list-group-item"> Date de fin : <%= %></li>
+      <li class="list-group-item"> Nombre d'inscrits : <%= %></li>
+      <li class="list-group-item"> Durée : <%= @element.duration %> heures</li>
+      <li class="list-group-item"> Organisateur : <%= @element.user.email %></li>
+    </div>
+  </div>
+  <div class="row icons-molecule">
+    <div class="col-md-4">
+      <% if current_user %>
+      <% if current_user.email != @element.user.email %>
+          <div class="button">
+              <%= button_to checkout_create_path(total: @element.price), :class=>"btn btn-primary", data: {turbo: false} do %>
+                <i class="fa-solid fa-money-bill"></i>
+                S'inscrire à l'évènement
+              <% end %>
+          </div>  
+      <% elsif current_user.email == @element.user.email %>
+      <% end %>
+      <% else %>  
+      <div class="btn btn-primary">
+          <%= link_to "Se connecter", new_user_session_path, :class=>"dropdown-item" %>
+      </div>  
+      <% end %> 
+    </div>
+  </div>
+  <div class="row mt-2 mb-2">
+    <div class="col-md-12 actions">
+      <%= link_to "Revenir à la page d'accueil", event_index_path, class: "btn btn-xl btn-danger btn-block" %>
+    </div>
+  </div>
+</div>
+<% if current_user %>
+    <% if current_user.email == @element.user.email %>
+        <h3>Ajouter ou changer l'image de l'évènement ?</h3>
+        <%= form_tag event_images_path(@event), data: { turbo: false }, multipart: true do %>
+            <%= file_field_tag :image %>
+            <%= submit_tag "mettre à jour" %>
+        <% end %>
+    <% end %>
+<% end %>        
+    
 </body>

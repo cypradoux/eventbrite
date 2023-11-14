@@ -1,8 +1,8 @@
 class AttendanceController < ApplicationController
     def create
-
+        
     end
-    
+
     def new
         @total = params[:total].to_d
         @session = Stripe::Checkout::Session.create(

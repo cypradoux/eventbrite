@@ -1,29 +1,7 @@
 <head>
-
 </head>
 
-
-<h1>Eventbrite</h1>
-<h2>Bienvenue à toi cher fan d'event variés !</h2>
-
-<div class="button">
-  <%= link_to "Créer un Event! +", new_event_path, :class=>"btn btn-outline-success my-2 my-sm-0" %>
-</div> 
-
-<p>Voici tous les évènements disponibles :</p>
-
-<div class="container">
-  <div class="row">
-    <% @events.each_with_index do |i, index|%>
-      <div class="col-md-4 mb-5">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body ">
-              <h2 class="card-subtitle mb-2 text-muted"><%="#{i.title}" %></h2>
-              <p><%="#{i.description}" %></p>
-              <%= link_to "En savoir plus sur l'évènement", event_path(id: index +1), class:"mon-style-css" %>
-          </div>
-        </div>
-      </div> 
-    <% end %>
-  </div>  
-</div>
+<body>
+<%= render 'layouts/banner' %> 
+<%= render 'layouts/card' %> 
+</body>

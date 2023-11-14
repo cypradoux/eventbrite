@@ -2,6 +2,7 @@ class Event < ApplicationRecord
     has_many :attendances
     has_many :users, through: :attendances
     belongs_to :user
+    has_one_attached :image
 
     validates :started_date, presence: true
     validates :duration, presence: true, numericality: { greater_than: 0 }

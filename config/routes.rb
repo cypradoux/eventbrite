@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'images/create'
   get 'static_pages/index'
   get 'static_pages/secret'
   devise_for :users
@@ -13,7 +14,9 @@ Rails.application.routes.draw do
   # root 'orders#new'
 
   resources :orders, only: [:new, :create]
-  resources :event
+  resources :event do
+  resources :images, only: [:create]
+    end
   resources :user
   resources :attendance
 
