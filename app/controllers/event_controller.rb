@@ -1,20 +1,13 @@
 class EventController < ApplicationController
     def create
-      
-
-        @events = Event.new(title: params[:title],
-                          description: params[:description],
-                          location: params[:location],
-                          started_date: params[:started_date],
-                          price: params[:price],
-                          duration: params[:duration])
+      @events = Event.new(event_params)
 
       @events.user = current_user
       if @events.save
         flash[:success] = "L'évènement a été créé avec succès"
         redirect_to event_index_path
       else
-        flash[:alert] = "Il manque des renseignements pour que tu puisses créer un évènement !"
+        flash[:alert] = @events.errors.full_messages.to_sentence
         redirect_to new_event_path
       end 
     end
@@ -35,4 +28,19 @@ class EventController < ApplicationController
     # @user = @event.user # Récupère l'utilisateur qui a créé l'événement
     # @user_email = @user.email
     end
+
+    private
+    # Use callbacks to share common setup or constraints between actions.
+      def set_event
+        @event = Event.find(params[:id])
+      end
+
+      def event_params
+        params.require(:event).permit(:started_date, :duration, :title, :description, :price, :location, :user_id)
+      end
+
+      def destroy
+        @event.destroy!
+      end
+        
 end
